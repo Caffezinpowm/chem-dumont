@@ -1,11 +1,16 @@
 import type { ChemData, Container, Recipe, Reagent } from '../types';
-import { fmt } from './text';
+import { ceilUnit, fmt, fmtInt } from './text';
 
 export interface PlanNode {
   key: string;
   id: string;
   nome: string;
+  /** Quantidade inteira necessária para a etapa seguinte. */
   amount: number;
+  /** Quantidade realmente produzida ao rodar lotes inteiros. */
+  producedAmount: number;
+  /** Lotes inteiros da reação; 0 quando o nó não é expandido. */
+  runs: number;
   reagent: Reagent | null;
   recipe: Recipe | null;
   catalyst: boolean;
@@ -36,7 +41,10 @@ export interface CatalystItem {
 export interface ProductionPlan {
   target: Reagent;
   recipe: Recipe;
+  /** Quantidade pedida pelo usuário; pode não ser múltipla do rendimento. */
   targetAmount: number;
+  /** Quantidade realmente obtida com lotes inteiros. */
+  producedAmount: number;
   yieldAmount: number;
   runs: number;
   tree: PlanNode;
@@ -82,6 +90,8 @@ function makeNode(
     id,
     nome: reagent?.nome ?? id,
     amount,
+    producedAmount: amount,
+    runs: 0,
     reagent,
     recipe: null,
     catalyst: false,
@@ -104,8 +114,8 @@ function expandIngredients(
   path: Set<string>,
 ): void {
   for (const ingredient of recipe.ingredientes) {
-    const amount = ingredient.quantidade * runs;
-    if (!Number.isFinite(amount)) continue;
+    const amount = ceilUnit(ingredient.quantidade * runs);
+    if (!Number.isFinite(amount) || amount <= 0) continue;
     const child = makeNode(context, ingredient.id, amount, {
       catalyst: ingredient.catalisador,
       isTarget: false,
@@ -138,11 +148,15 @@ function expandIngredients(
     if (!nested) continue;
     const nestedYield = recipeYield(nested, child.id);
     if (!(nestedYield > 0)) continue;
+    const nestedRuns = ceilUnit(amount / nestedYield);
+    if (!(nestedRuns > 0)) continue;
     child.recipe = nested;
     child.expanded = true;
+    child.runs = nestedRuns;
+    child.producedAmount = nestedRuns * nestedYield;
     const childPath = new Set(path);
     childPath.add(child.id);
-    expandIngredients(context, child, nested, amount / nestedYield, depth + 1, childPath);
+    expandIngredients(context, child, nested, nestedRuns, depth + 1, childPath);
   }
 }
 
@@ -216,18 +230,25 @@ export function buildProductionPlan(
     nodeLimit: options.nodeLimit ?? 600,
     maxDepth: options.maxDepth ?? 7,
   };
-  const runs = targetAmount / yieldAmount;
+  const runs = ceilUnit(targetAmount / yieldAmount);
+  if (!(runs > 0)) return null;
+  const producedAmount = runs * yieldAmount;
   const tree = makeNode(context, target.id, targetAmount, {
     reagent: target,
     recipe,
     isTarget: true,
     expanded: true,
+    runs,
+    producedAmount,
   });
   expandIngredients(context, tree, recipe, runs, 0, new Set([target.id]));
   const shopping = new Map<string, ShoppingItem>();
   const catalysts = new Map<string, CatalystItem>();
   for (const child of tree.children) collectPlan(child, shopping, catalysts);
-  const totalInput = recipe.ingredientes.reduce((sum, ingredient) => sum + ingredient.quantidade * runs, 0);
+  const totalInput = recipe.ingredientes.reduce(
+    (sum, ingredient) => sum + ceilUnit(ingredient.quantidade * runs),
+    0,
+  );
   const shoppingList = [...shopping.values()].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
   const catalystList = [...catalysts.values()].sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
   const truncated = [...shoppingList].some((item) => item.source === 'intermediate' || item.source === 'cycle');
@@ -235,21 +256,30 @@ export function buildProductionPlan(
     target,
     recipe,
     targetAmount,
+    producedAmount,
     yieldAmount,
     runs,
     tree,
     shopping: shoppingList,
     catalysts: catalystList,
     totalInput,
-    containers: containerSuggestions(data, Math.max(targetAmount, totalInput)),
+    containers: containerSuggestions(data, Math.max(producedAmount, totalInput)),
     truncated,
   };
 }
 
 export function totalShoppingVolume(plan: ProductionPlan): number {
-  return plan.shopping.reduce((sum, item) => sum + item.amount, 0);
+  return plan.shopping.reduce((sum, item) => sum + ceilUnit(item.amount), 0);
+}
+
+/** Verdadeiro quando os lotes inteiros produzem mais do que o pedido. */
+export function planHasSurplus(plan: ProductionPlan): boolean {
+  return plan.producedAmount - plan.targetAmount > 1e-9;
 }
 
 export function planSummary(plan: ProductionPlan): string {
-  return `${fmt(plan.runs)} ${plan.runs === 1 ? 'lote' : 'lotes'} para ${fmt(plan.targetAmount)}u`;
+  const lots = `${fmtInt(plan.runs)} ${plan.runs === 1 ? 'lote' : 'lotes'}`;
+  return planHasSurplus(plan)
+    ? `${lots} · ${fmt(plan.producedAmount)}u produzidos (pedido ${fmt(plan.targetAmount)}u)`
+    : `${lots} para ${fmt(plan.producedAmount)}u`;
 }

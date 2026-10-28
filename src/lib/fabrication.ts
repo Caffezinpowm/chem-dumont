@@ -9,7 +9,7 @@ import {
 import { formulaSummary, reagentSprite } from './components';
 import { BASE_URL } from './router';
 import { currentTheme } from './state';
-import { colorCss, esc, fmt, fmtInt } from './text';
+import { colorCss, esc, fmt, fmtDose, fmtInt } from './text';
 
 interface DocumentPictureInPictureApi {
   requestWindow(options?: {
@@ -79,7 +79,7 @@ function itemHtml(item: CraftItem): string {
       <small>${esc(item.id)} ${sourceTag(item.source)}</small>
       ${detail}
     </span>
-    <strong class="craft-item__amount">${fmt(item.amount)}u</strong>
+    <strong class="craft-item__amount">${fmtDose(item.amount)}u</strong>
   </li>`;
 }
 
@@ -113,7 +113,7 @@ function stepConditionsHtml(step: CraftStep): string {
     <div class="craft-conditions">
       <div><span>Temperatura</span><strong>${esc(step.temperature ?? 'Sem restrição de temperatura')}</strong></div>
       <div><span>Rendimento base</span><strong>${fmt(step.yieldAmount)}u</strong></div>
-      <div><span>Lotes nesta etapa</span><strong>${fmt(step.runs)}</strong></div>
+      <div><span>Lotes nesta etapa</span><strong>${fmtInt(step.runs)}</strong></div>
       <div><span>Receita</span><strong>${esc(step.recipeId ?? '—')}</strong></div>
     </div>
     ${
@@ -164,7 +164,7 @@ function headerHtml(session: CraftSession): string {
       <div class="craft-head__copy">
         <span class="craft-head__eyebrow">fabricação guiada</span>
         <strong>${esc(procedure.target.nome)}</strong>
-        <small>${esc(procedure.recipe.id)} · ${fmt(procedure.targetAmount)}u</small>
+        <small>${esc(procedure.recipe.id)} · pedido ${fmt(procedure.targetAmount)}u</small>
       </div>
     </div>
     <div class="craft-head__actions">
@@ -205,6 +205,11 @@ function stepHtml(session: CraftSession, step: CraftStep): string {
       </div>
       <h2 class="craft-step__title" data-craft-step-title tabindex="-1">${esc(step.title)}</h2>
       <p class="craft-step__lead">${esc(step.description)}</p>
+      ${
+        step.ingredients.length || step.catalysts.length
+          ? '<p class="craft-dose-note">Produção em lotes inteiros. Quantidades de entrada arredondadas para cima; o excedente fica no recipiente.</p>'
+          : ''
+      }
       ${warningsHtml(step.warnings)}
       ${itemsPanel(step.kind === 'materials' ? 'Materiais de partida' : 'Ingredientes da reação', step.ingredients)}
       ${itemsPanel('Catalisadores', step.catalysts, 'catalyst')}
@@ -225,8 +230,12 @@ function completionHtml(session: CraftSession): string {
     <section class="craft-complete">
       <div class="craft-complete__visual">${reagentSprite(procedure.target, 'lg')}</div>
       <p class="eyebrow">lote concluído</p>
-      <h2 class="craft-step__title" data-craft-step-title tabindex="-1">${fmt(procedure.targetAmount)}u de ${esc(procedure.target.nome)}</h2>
-      <p class="craft-complete__lead">${fmt(procedure.runs)} ${procedure.runs === 1 ? 'lote' : 'lotes'} da receita <code>${esc(procedure.recipe.id)}</code>.</p>
+      <h2 class="craft-step__title" data-craft-step-title tabindex="-1">${fmt(procedure.producedAmount)}u de ${esc(procedure.target.nome)}</h2>
+      <p class="craft-complete__lead">${fmtInt(procedure.runs)} ${procedure.runs === 1 ? 'lote' : 'lotes'} da receita <code>${esc(procedure.recipe.id)}</code>${
+        procedure.producedAmount > procedure.targetAmount + 1e-9
+          ? ` · pedido de ${fmt(procedure.targetAmount)}u`
+          : ''
+      }.</p>
       <dl class="craft-complete__stats">
         <div><dt>Etapas</dt><dd>${fmtInt(procedure.steps.length)}</dd></div>
         <div><dt>Materiais-base</dt><dd>${fmtInt(procedure.shopping.length)}</dd></div>
@@ -467,8 +476,8 @@ function modalPreviewHtml(procedure: CraftProcedure): string {
   return `<div class="craft-preview">
     <div class="craft-preview__stats">
       <span><strong>${fmtInt(procedure.steps.length)}</strong> etapas</span>
-      <span><strong>${fmt(procedure.runs)}</strong> ${procedure.runs === 1 ? 'lote' : 'lotes'}</span>
-      <span><strong>${fmt(procedure.targetAmount)}u</strong> finais</span>
+      <span><strong>${fmtInt(procedure.runs)}</strong> ${procedure.runs === 1 ? 'lote' : 'lotes'}</span>
+      <span><strong>${fmt(procedure.producedAmount)}u</strong> produzidos</span>
       <span><strong>${fmtInt(procedure.shopping.length)}</strong> materiais-base</span>
     </div>
     <ol class="craft-preview__steps">
@@ -486,7 +495,7 @@ function modalPreviewHtml(procedure: CraftProcedure): string {
         : ''
     }
     ${procedure.truncated ? '<p class="craft-preview__warning">Há intermediários que não puderam ser expandidos; confira os materiais antes de começar.</p>' : ''}
-    <p class="craft-preview__fine">Os intermediários usam a receita principal de cada reagente. A receita escolhida é usada no produto final.</p>
+    <p class="craft-preview__fine">Os intermediários usam a receita principal de cada reagente. A receita escolhida é usada no produto final. A produção roda em lotes inteiros e pode ultrapassar a quantidade desejada; quantidades de entrada são arredondadas para cima em unidades inteiras do dispensador.</p>
   </div>`;
 }
 
@@ -533,7 +542,7 @@ export function fabricationModalHtml(
             </select>
           </label>
           <label class="field field--amount">
-            <span>Quantidade final</span>
+            <span>Quantidade desejada</span>
             <div class="input-unit">
               <input name="amount" data-craft-amount type="number" min="0.1" step="0.1" value="${amount}" inputmode="decimal" />
               <span>u</span>

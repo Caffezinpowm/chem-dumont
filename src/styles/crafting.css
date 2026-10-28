@@ -504,6 +504,13 @@ body.craft-doc::before {
   line-height: 1.5;
 }
 
+.craft-dose-note {
+  margin: -4px 0 12px;
+  color: var(--muted-2);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
 .craft-alert {
   margin-bottom: 12px;
   padding: 9px 10px;

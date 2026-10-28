@@ -3,6 +3,7 @@ import { assetHref, appHref, navigate } from '../lib/router';
 import { searchReagents } from '../lib/search';
 import {
   buildProductionPlan,
+  planHasSurplus,
   planSummary,
   recipeYield,
   totalShoppingVolume,
@@ -14,6 +15,7 @@ import {
   displaySource,
   esc,
   fmt,
+  fmtDose,
   fmtInt,
   formatTemperature,
   percent,
@@ -460,7 +462,13 @@ function treeNodeHtml(node: PlanNode, depth: number): string {
   if (node.depthLimited) labels.push('<span class="pill">limite de níveis</span>');
   if (node.nodeLimited) labels.push('<span class="pill">limite de nós</span>');
   if (node.reagent?.dispensavel) labels.push('<span class="pill pill--dispenser">dispensador</span>');
-  const content = `<span class="tree-node__amount">${fmt(node.amount)}u</span>
+  const leftover = node.producedAmount - node.amount;
+  if (leftover > 1e-9) labels.push(`<span class="pill">sobra ${fmt(leftover)}u</span>`);
+  const title =
+    leftover > 1e-9
+      ? `Produzido em lotes inteiros; a etapa seguinte usa ${fmt(node.amount)}u.`
+      : '';
+  const content = `<span class="tree-node__amount"${title ? ` title="${esc(title)}"` : ''}>${fmt(node.producedAmount)}u</span>
     <span class="tree-node__info">
       <a href="${reagentHref(node.id)}">${esc(node.nome)}</a>
       <span class="tree-node__meta">${esc(node.id)}${node.recipe ? ` · ${esc(node.recipe.id)}` : ''}</span>
@@ -482,13 +490,19 @@ export function productionPlanHtml(plan: ProductionPlan, data: ChemData): string
   const byproducts = plan.recipe.produtos.filter((product) => product.id !== target.id);
   const shoppingVolume = totalShoppingVolume(plan);
   const containers = plan.containers;
+  const surplus = planHasSurplus(plan);
+  const lots = `${fmtInt(plan.runs)} ${plan.runs === 1 ? 'lote' : 'lotes'}`;
+  const roundingNote = surplus
+    ? `Lotes inteiros: ${lots} produzem ${fmt(plan.producedAmount)}u para um pedido de ${fmt(plan.targetAmount)}u. Doses arredondadas para cima; o excedente fica no recipiente.`
+    : 'Lotes inteiros e doses arredondadas para cima. O excedente de reagentes fica no recipiente.';
   return `<div class="plan">
     <div class="plan__stats">
-      <div class="stat-mini"><span class="stat-mini__label">Lotes</span><strong>${fmt(plan.runs)}</strong></div>
-      <div class="stat-mini"><span class="stat-mini__label">Rendimento</span><strong>${fmt(plan.yieldAmount)} u</strong></div>
-      <div class="stat-mini"><span class="stat-mini__label">Volume de entrada</span><strong>${fmt(plan.totalInput)} u</strong></div>
+      <div class="stat-mini"><span class="stat-mini__label">Lotes</span><strong>${fmtInt(plan.runs)}</strong></div>
+      <div class="stat-mini"><span class="stat-mini__label">Produção</span><strong>${fmt(plan.producedAmount)} u</strong></div>
+      <div class="stat-mini"><span class="stat-mini__label">Meio reacional</span><strong>${fmt(plan.totalInput)} u</strong></div>
       <div class="stat-mini"><span class="stat-mini__label">Ingredientes-base</span><strong>${plan.shopping.length}</strong></div>
     </div>
+    <p class="plan__rounding"><span aria-hidden="true">↑</span> ${esc(roundingNote)}</p>
     <div class="plan__grid">
       <section class="plan-panel">
         <div class="plan-panel__head">
@@ -499,8 +513,8 @@ export function productionPlanHtml(plan: ProductionPlan, data: ChemData): string
         <ul class="tree-list tree-list--root">
           <li class="tree-root">
             <div class="tree-node tree-node--root">
-              <span class="tree-node__amount">${fmt(plan.targetAmount)}u</span>
-              <span class="tree-node__info"><strong>${esc(target.nome)}</strong><span class="tree-node__meta">${esc(plan.recipe.id)}</span></span>
+              <span class="tree-node__amount">${fmt(plan.producedAmount)}u</span>
+              <span class="tree-node__info"><strong>${esc(target.nome)}</strong><span class="tree-node__meta">${esc(plan.recipe.id)}${surplus ? ` · pedido ${fmt(plan.targetAmount)}u` : ''}</span></span>
             </div>
             ${
               plan.tree.children.length
@@ -524,7 +538,7 @@ export function productionPlanHtml(plan: ProductionPlan, data: ChemData): string
                     .map(
                       (item) => `<tr>
                         <td><a href="${reagentHref(item.id)}">${esc(item.nome)}</a><br><span class="muted small">${esc(item.id)}</span></td>
-                        <td class="num">${fmt(item.amount)} u</td>
+                        <td class="num">${fmtDose(item.amount)} u</td>
                         <td><span class="source-label source-label--${item.source}">${esc(sourceLabel(item.source))}</span><br><span class="muted small">${esc(item.detail)}</span></td>
                       </tr>`,
                     )
@@ -541,7 +555,7 @@ export function productionPlanHtml(plan: ProductionPlan, data: ChemData): string
                 <ul>${plan.catalysts
                   .map(
                     (item) =>
-                      `<li><a href="${reagentHref(item.id)}">${esc(item.nome)}</a> <span class="muted">${fmt(item.amount)} u</span></li>`,
+                      `<li><a href="${reagentHref(item.id)}">${esc(item.nome)}</a> <span class="muted">${fmtDose(item.amount)} u</span></li>`,
                   )
                   .join('')}</ul>
               </div>`
@@ -564,7 +578,7 @@ export function productionPlanHtml(plan: ProductionPlan, data: ChemData): string
         <h3>Recipientes</h3>
         <span class="muted">capacidades do repositório</span>
       </div>
-      <p class="muted small">Para comportar o maior volume entre o produto desejado e o meio reacional (${fmt(Math.max(plan.targetAmount, plan.totalInput))} u). A divisão em vários recipientes pode ser necessária.</p>
+      <p class="muted small">Para comportar o maior volume entre a produção e o meio reacional (${fmt(Math.max(plan.producedAmount, plan.totalInput))} u). A divisão em vários recipientes pode ser necessária.</p>
       <div class="container-strip">
         ${
           containers.length
@@ -599,7 +613,7 @@ function sourceLabel(source: string): string {
 }
 
 function containersNeeded(plan: ProductionPlan, container: Container): string {
-  const volume = Math.max(plan.targetAmount, plan.totalInput);
+  const volume = Math.max(plan.producedAmount, plan.totalInput);
   if (container.capacidade >= volume) return 'comporta o lote';
   const count = Math.ceil(volume / container.capacidade);
   return `≈ ${fmtInt(count)} recipientes`;
@@ -640,7 +654,7 @@ export function plannerHtml(options: {
         </select>
       </label>
       <label class="field field--amount">
-        <span>Quantidade final</span>
+        <span>Quantidade desejada</span>
         <div class="input-unit">
           <input name="amount" type="number" min="0.1" step="0.1" value="${amount}" inputmode="decimal" />
           <span>u</span>

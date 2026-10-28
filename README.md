@@ -113,6 +113,11 @@ O avanço funciona por clique, pelas teclas <kbd>←</kbd>/<kbd>→</kbd> (ou <k
 swipe. A conclusão mostra o total produzido, materiais-base, catalisadores, recipiente sugerido e
 subprodutos, com opção de refazer o lote.
 
+O plano trabalha com **lotes inteiros** e arredonda as doses para cima em unidades inteiras, porque o
+ChemDispenser dosa em unidades inteiras. Por isso a produção pode ultrapassar a quantidade desejada:
+um pedido de 50u com rendimento de 3u/lote vira 17 lotes e 51u produzidos. As proporções da receita
+continuam exatas; o excedente permanece no recipiente.
+
 ### Janela sempre no topo e painel reserva
 
 O MVP usa **Document Picture-in-Picture** quando o navegador oferece a API — Chrome e Edge no

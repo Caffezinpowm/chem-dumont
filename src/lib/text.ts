@@ -17,6 +17,22 @@ export function attr(value: unknown): string {
 const numberFormatter = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 });
 const integerFormatter = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
 
+/**
+ * Arredonda para cima em unidades inteiras. O ChemDispenser trabalha com
+ * doses inteiras, então nunca exibimos uma quantidade menor do que a necessária.
+ * O epsilon evita que ruído de ponto flutuante transforme 5 em 6.
+ */
+export function ceilUnit(value: number): number {
+  if (!Number.isFinite(value) || value <= 0) return 0;
+  return Math.max(0, Math.ceil(value - 1e-9));
+}
+
+/** Formata uma quantidade de dispensador, arredondada para cima em unidades inteiras. */
+export function fmtDose(value: number | null | undefined): string {
+  if (value == null || !Number.isFinite(value)) return '—';
+  return integerFormatter.format(ceilUnit(value));
+}
+
 export function fmt(value: number | null | undefined): string {
   if (value == null || !Number.isFinite(value)) return '—';
   return numberFormatter.format(Math.round(value * 100) / 100);

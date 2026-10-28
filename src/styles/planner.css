@@ -108,6 +108,22 @@
   font-weight: 650;
 }
 
+.plan__rounding {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.plan__rounding span {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
 .plan__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);

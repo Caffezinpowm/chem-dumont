@@ -84,7 +84,7 @@ function conditionsHtml(recipe: Recipe): string {
     <div><span>Temperatura</span><strong>${esc(formatTemperature(recipe.temperatura_min, recipe.temperatura_max))}</strong></div>
     <div><span>Equipamento</span><strong>${requirements}</strong></div>
     <div><span>Quantizada</span><strong>${recipe.quantizada ? 'sim' : 'não'}</strong></div>
-    <div><span>Rendimento</span><strong>${fmt(recipeYield(recipe, recipe.produto_alvo))} u</strong></div>
+    <div><span>Rendimento por lote</span><strong>${fmt(recipeYield(recipe, recipe.produto_alvo))} u</strong></div>
   </div>`;
 }
 
@@ -153,13 +153,13 @@ export function calculatorView(data: ChemData, query: URLSearchParams): ViewResu
                 </select>
               </label>
               <label class="field">
-                <span>Quantidade final</span>
+                <span>Quantidade desejada</span>
                 <div class="input-unit">
                   <input name="amount" data-calc-amount type="number" min="0.1" step="0.1" value="${amount}" inputmode="decimal" />
                   <span>u</span>
                 </div>
               </label>
-              <p class="fine-print">A calculadora usa a receita principal para expandir os ingredientes intermediários. As alternativas ficam disponíveis na lista de receitas.</p>
+              <p class="fine-print">A calculadora usa a receita principal para expandir os ingredientes intermediários. O plano roda em lotes inteiros e arredonda as doses para cima; a produção pode ultrapassar a quantidade desejada.</p>
               <button class="button button--primary button--block" type="submit">Calcular lote</button>
             </form>
 
@@ -182,7 +182,7 @@ export function calculatorView(data: ChemData, query: URLSearchParams): ViewResu
               <span class="eyebrow">referência</span>
               <h2>Como ler o resultado</h2>
               <dl class="calc-legend">
-                <div><dt>Lotes</dt><dd>quantas vezes a reação precisa rodar para chegar à quantidade final.</dd></div>
+                <div><dt>Lotes</dt><dd>quantas vezes a reação precisa rodar; o cálculo arredonda para lotes inteiros.</dd></div>
                 <div><dt>Folhas</dt><dd>reagentes sem receita posterior ou disponíveis no dispensador; entram na lista de compras.</dd></div>
                 <div><dt>Catalisadores</dt><dd>precisam estar presentes, mas não são consumidos pela reação.</dd></div>
               </dl>

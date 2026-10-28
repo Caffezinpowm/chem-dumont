@@ -479,6 +479,10 @@
     grid-template-columns: 1fr;
   }
 
+  .calc-output .plan__grid {
+    grid-template-columns: 1fr;
+  }
+
   .planner__head {
     flex-direction: column;
     gap: 6px;
@@ -615,6 +619,11 @@
 
   .plan__stats {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .plan-panel__head {
+    flex-direction: column;
+    gap: 3px;
   }
 
   .tree-node__amount {

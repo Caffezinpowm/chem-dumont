@@ -7,7 +7,7 @@ import {
   type ProductionPlan,
   type ShoppingItem,
 } from './production';
-import { fmt, formatTemperature } from './text';
+import { fmt, fmtInt, formatTemperature } from './text';
 
 export type CraftItemSource = ShoppingItem['source'] | 'reaction' | 'catalyst';
 
@@ -52,6 +52,7 @@ export interface CraftProcedure {
   target: Reagent;
   recipe: Recipe;
   targetAmount: number;
+  producedAmount: number;
   yieldAmount: number;
   runs: number;
   steps: CraftStep[];
@@ -94,7 +95,8 @@ function reactionStep(
   reagents: Map<string, Reagent>,
 ): CraftStep {
   const yieldAmount = recipeYield(recipe, node.id);
-  const runs = yieldAmount > 0 ? node.amount / yieldAmount : 1;
+  const runs = node.runs > 0 ? node.runs : 1;
+  const producedAmount = node.producedAmount;
   const ingredients: CraftItem[] = [];
   const catalysts: CraftItem[] = [];
 
@@ -121,12 +123,20 @@ function reactionStep(
     else ingredients.push(item);
   }
 
+  const remaining = producedAmount - node.amount;
+  const usage =
+    remaining > 1e-9
+      ? node.isTarget
+        ? ` Pedido de ${fmt(node.amount)}u.`
+        : ` A etapa seguinte usa ${fmt(node.amount)}u; ${fmt(remaining)}u ${remaining === 1 ? 'fica' : 'ficam'} no recipiente.`
+      : '';
+
   return {
     key: `reaction-${node.key}`,
     kind: 'reaction',
     eyebrow: node.isTarget ? 'lote final' : 'intermediário',
-    title: `Produzir ${fmt(node.amount)}u de ${node.nome}`,
-    description: `Receita ${recipe.id} · ${fmt(runs)} ${runs === 1 ? 'lote' : 'lotes'} para produzir ${fmt(node.amount)}u.`,
+    title: `Produzir ${fmt(producedAmount)}u de ${node.nome}`,
+    description: `Receita ${recipe.id} · ${fmtInt(runs)} ${runs === 1 ? 'lote' : 'lotes'} para produzir ${fmt(producedAmount)}u.${usage}`,
     ingredients,
     catalysts,
     temperature: formatTemperature(recipe.temperatura_min, recipe.temperatura_max),
@@ -134,7 +144,7 @@ function reactionStep(
     output: {
       id: node.id,
       nome: node.nome,
-      amount: node.amount,
+      amount: producedAmount,
     },
     byproducts: outputList(recipe, runs, node.id),
     effects: recipe.efeitos_da_reacao,
@@ -200,7 +210,7 @@ export function buildCraftProcedure(
       kind: 'materials',
       eyebrow: 'preparação',
       title: 'Separe os materiais',
-      description: `Reúna os itens-base para ${fmt(plan.runs)} ${plan.runs === 1 ? 'lote' : 'lotes'} da receita ${recipe.id}.`,
+      description: `Reúna os itens-base para ${fmtInt(plan.runs)} ${plan.runs === 1 ? 'lote' : 'lotes'} da receita ${recipe.id} · produção de ${fmt(plan.producedAmount)}u.`,
       ingredients: materials,
       catalysts,
       temperature: null,
@@ -227,6 +237,7 @@ export function buildCraftProcedure(
     target,
     recipe,
     targetAmount,
+    producedAmount: plan.producedAmount,
     yieldAmount: plan.yieldAmount,
     runs: plan.runs,
     steps,
