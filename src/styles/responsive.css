@@ -1,0 +1,687 @@
+/* ============================================================
+   Adaptação para telas menores
+   ============================================================ */
+
+@media (max-width: 1180px) {
+  .site-header__inner {
+    gap: 14px;
+  }
+
+  .main-nav a {
+    padding-inline: 9px;
+  }
+
+  .header-search {
+    width: clamp(190px, 22vw, 280px);
+  }
+
+  .hero__inner {
+    gap: 40px;
+  }
+
+  .reagent-hero {
+    grid-template-columns: 140px minmax(0, 1fr) 270px;
+    gap: 24px;
+  }
+
+  .detail-layout {
+    grid-template-columns: minmax(0, 1fr) 292px;
+  }
+
+  .calc-layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1050px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-side {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .group-strip {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+
+  .reagent-hero {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+
+  .reagent-hero__aside {
+    grid-column: 1 / -1;
+    padding-top: 16px;
+    padding-left: 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-side {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .detail-side .content-section:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .calc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-side {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .calc-form {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .calc-shortcuts {
+    height: 100%;
+  }
+
+  .plan__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .decision-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .site-header__inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    min-height: 64px;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .main-nav {
+    display: none;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 0 0 12px;
+  }
+
+  .main-nav.is-open {
+    display: flex;
+  }
+
+  .main-nav a {
+    padding: 10px 12px;
+    font-size: 0.86rem;
+  }
+
+  .main-nav a.is-active::after {
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    left: 3px;
+    width: 2px;
+    height: 18px;
+    transform: translateY(-50%);
+  }
+
+  .header-tools {
+    grid-column: 3;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__copy {
+    max-width: 720px;
+  }
+
+  .hero__visual {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  .hero-card {
+    transform: rotate(0.7deg);
+  }
+
+  .group-index {
+    grid-template-columns: 1fr;
+  }
+
+  .group-card {
+    min-height: 170px;
+  }
+
+  .reagent-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .reagent-hero__visual {
+    min-height: 130px;
+  }
+
+  .reagent-hero__visual .reagent-sprite {
+    width: 116px;
+    height: 116px;
+  }
+
+  .reagent-hero__visual::before {
+    width: 126px;
+    height: 126px;
+  }
+
+  .reagent-hero__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-nav {
+    top: 64px;
+  }
+
+  .group-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .group-hero__aside {
+    display: none;
+  }
+
+  .planner-form {
+    grid-template-columns: 1fr 150px;
+  }
+
+  .planner-form .button {
+    grid-column: 1 / -1;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .about-lead {
+    grid-template-columns: 1fr;
+  }
+
+  .about-lead__mark {
+    width: 64px;
+    height: 64px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .card-grid--featured {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcut-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcut-card {
+    min-height: auto;
+  }
+
+  .shortcut-card__icon {
+    margin-bottom: 10px;
+  }
+
+  .home-side {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-side {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-form {
+    grid-column: auto;
+  }
+
+  .calc-shortcuts {
+    height: auto;
+  }
+
+  .calc-target {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .calc-target__visual {
+    width: 92px;
+    height: 92px;
+  }
+
+  .calc-target .favorite-button {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .calc-conditions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .credit-intro {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .decision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__columns {
+    gap: 22px;
+  }
+}
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 24px;
+  }
+
+  .container {
+    width: min(var(--container), 100% - 32px);
+  }
+
+  .site-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 8px;
+    padding-top: 9px;
+  }
+
+  .header-tools {
+    display: contents;
+  }
+
+  .header-search {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .nav-toggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .main-nav {
+    grid-row: 3;
+  }
+
+  .brand__mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand__text strong {
+    font-size: 0.92rem;
+  }
+
+  .brand__text small {
+    font-size: 0.5rem;
+  }
+
+  .header-search .search-panel {
+    width: min(100%, calc(100vw - 32px));
+  }
+
+  .hero__copy h1 {
+    max-width: 13ch;
+    font-size: clamp(2.65rem, 12vw, 4rem);
+  }
+
+  .hero-card {
+    width: min(330px, 100%);
+  }
+
+  .stats-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat:nth-child(2){
+    border-right: 0;
+  }
+
+  .stat:nth-child(1),
+  .stat:nth-child(2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:nth-child(3) {
+    border-right: 1px solid var(--line);
+  }
+
+  .page-heading {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .page-heading__actions {
+    justify-content: flex-start;
+  }
+
+  .section-head {
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-head__actions {
+    justify-content: flex-start;
+  }
+
+  .section-nav {
+    position: static;
+  }
+
+  .group-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .group-overview__stat {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .group-overview__stat:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .group-overview__stat:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .filter-panel__row {
+    align-items: stretch;
+  }
+
+  .field--compact {
+    flex: 1 1 150px;
+    min-width: 0;
+  }
+
+  .filter-reset {
+    margin-left: 0;
+  }
+
+  .list-toolbar {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .reagent-hero {
+    padding: 18px;
+  }
+
+  .reagent-hero__title-row {
+    flex-wrap: wrap;
+  }
+
+  .reagent-hero__title-row .favorite-button {
+    margin-top: 0;
+  }
+
+  .detail-side {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-side .content-section:first-child {
+    grid-column: auto;
+  }
+
+  .plan__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner__head {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .planner-form {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-form .button {
+    grid-column: auto;
+  }
+
+  .recipe-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-target {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-target__visual {
+    width: 90px;
+    height: 90px;
+  }
+
+  .calc-target .favorite-button {
+    grid-column: auto;
+  }
+
+  .calc-output {
+    padding: 14px;
+  }
+
+  .calc-conditions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .favorites-toolbar {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .print-guide__head {
+    flex-direction: column;
+  }
+
+  .site-footer__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .about-lead {
+    padding: 18px;
+  }
+
+  .about-panel {
+    padding: 17px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+
+  .search-box--hero {
+    --search-input-height: 54px;
+  }
+
+  .search-box--hero .search-box__input {
+    padding-right: 76px;
+    font-size: 0.86rem;
+  }
+
+  .search-box--hero .search-box__submit {
+    top: 8px;
+    right: 8px;
+    height: 38px;
+    padding-inline: 10px;
+  }
+
+  .search-box--hero .search-box__hint {
+    padding-inline: 3px;
+  }
+
+  .quick-link {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .card-grid,
+  .card-grid--list {
+    grid-template-columns: 1fr;
+  }
+
+  .reagent-card {
+    padding: 14px;
+  }
+
+  .group-index {
+    gap: 9px;
+  }
+
+  .group-card {
+    padding: 15px;
+  }
+
+  .group-overview__stat {
+    padding: 13px;
+  }
+
+  .group-hero {
+    padding: 17px;
+  }
+
+  .group-switcher {
+    margin-inline: -12px;
+    padding-inline: 12px;
+  }
+
+  .plan__stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tree-node__amount {
+    min-width: 44px;
+  }
+
+  .tree-node__labels {
+    display: none;
+  }
+
+  .calc-conditions {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-shortcuts {
+    padding: 14px;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-stats > div {
+    padding: 11px;
+  }
+
+  .about-lead__mark {
+    display: none;
+  }
+
+  .site-footer__columns {
+    grid-template-columns: 1fr;
+  }
+
+  .license-table {
+    min-width: 640px;
+  }
+
+  .print-guide {
+    padding: 12px;
+    margin-inline: -12px;
+    border-radius: 0;
+  }
+
+  .toast {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand__text small {
+    display: none;
+  }
+
+  .reagent-hero__facts {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__quick {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calc-conditions {
+    grid-template-columns: 1fr;
+  }
+}

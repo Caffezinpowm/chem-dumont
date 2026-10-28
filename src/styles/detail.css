@@ -1,0 +1,639 @@
+/* ============================================================
+   Ficha de reagente, efeitos, limiares e receitas
+   ============================================================ */
+
+.page--detail {
+  padding-top: clamp(22px, 3vw, 34px);
+}
+
+.reagent-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) 300px;
+  gap: clamp(22px, 3vw, 38px);
+  align-items: center;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--reagent-accent, var(--accent));
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(ellipse 52% 110% at 4% 50%, var(--reagent-soft, transparent), transparent 60%),
+    radial-gradient(ellipse 50% 120% at 100% 0%, var(--reagent-soft-2, transparent), transparent 65%),
+    var(--panel);
+  overflow: hidden;
+}
+
+.reagent-hero::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 230px;
+  height: 230px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.reagent-hero__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+}
+
+.reagent-hero__visual::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 152px;
+  height: 152px;
+  border: 1px dashed color-mix(in srgb, var(--reagent-accent, var(--accent)) 35%, var(--line));
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reagent-hero__visual .reagent-sprite {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 15px 26px color-mix(in srgb, var(--reagent-accent, var(--accent)) 26%, transparent));
+}
+
+.reagent-hero__copy {
+  min-width: 0;
+}
+
+.reagent-hero__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 10px;
+  margin-bottom: 9px;
+}
+
+.reagent-hero__title-row {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.reagent-hero__title-row h1 {
+  margin: 0;
+  font-size: clamp(2.15rem, 4.4vw, 3.65rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.reagent-hero__title-row .favorite-button {
+  margin-top: 4px;
+}
+
+.reagent-hero__desc {
+  max-width: 68ch;
+  margin-bottom: 17px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.reagent-hero__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px 14px;
+  margin-bottom: 18px;
+  padding-block: 13px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+}
+
+.fact__label {
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reagent-hero__aside {
+  align-self: stretch;
+  min-width: 0;
+  padding-left: clamp(18px, 2.5vw, 28px);
+  border-left: 1px solid var(--line);
+}
+
+.hero-formula {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-formula strong {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.hero-threshold {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.hero-threshold > .muted {
+  flex-basis: 100%;
+}
+
+.mini-threshold {
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.mini-threshold.is-overdose {
+  border-color: color-mix(in srgb, var(--danger) 36%, transparent);
+  color: var(--danger);
+}
+
+.reagent-hero__aside .fine-print {
+  margin-top: 8px;
+  font-size: 0.66rem;
+}
+
+/* ---------- Navegação interna ---------- */
+
+.section-nav {
+  position: sticky;
+  top: 70px;
+  z-index: 80;
+  display: flex;
+  gap: 2px;
+  margin: 20px 0 22px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a {
+  flex: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  background: var(--panel-2);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+.detail-main,
+.detail-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.detail-side {
+  position: sticky;
+  top: 132px;
+}
+
+.content-section {
+  padding: clamp(18px, 2.6vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--panel) 76%, transparent);
+}
+
+.content-section .section-head {
+  margin-bottom: 17px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.content-section .section-head h2 {
+  font-size: clamp(1.4rem, 2.3vw, 1.8rem);
+}
+
+.content-section .section-head .eyebrow {
+  margin-bottom: 5px;
+}
+
+/* ---------- Efeitos ---------- */
+
+.effects {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.effect-group {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.effect-group__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.effect-group__head h3 {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.effect-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.effect-item {
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.effect-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.effect-item:last-child {
+  padding-bottom: 0;
+}
+
+.effect-item__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 3px;
+}
+
+.effect-item p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.condition-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 7px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.condition-list li {
+  margin: 0;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+/* ---------- Limiares ---------- */
+
+.threshold-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.threshold-card {
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warning);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--bg-soft);
+}
+
+.threshold-card.is-overdose {
+  border-left-color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 5%, var(--bg-soft));
+}
+
+.threshold-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.threshold-amount {
+  color: var(--ink-strong);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.threshold-card .muted {
+  margin-bottom: 5px;
+}
+
+.threshold-effects {
+  margin: 0;
+  padding-left: 1em;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.threshold-effects li {
+  margin-bottom: 2px;
+}
+
+/* ---------- Metadados ---------- */
+
+.meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.meta-list > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.meta-list > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.meta-list dt {
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.meta-list dd {
+  color: var(--muted);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.meta-list dd code {
+  font-size: 0.68rem;
+}
+
+.meta-list .group-badge {
+  font-size: 0.67rem;
+}
+
+/* ---------- Usado em ---------- */
+
+.usedin-list {
+  display: grid;
+  gap: 8px;
+}
+
+.usedin-card {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.usedin-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.usedin-card__head .icon-link {
+  margin-left: auto;
+}
+
+.usedin-card p {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.usedin-card .fine-print {
+  margin-top: 5px;
+  font-size: 0.62rem;
+}
+
+/* ---------- Receitas ---------- */
+
+.recipe-card {
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+}
+
+.recipe-card.is-primary {
+  border-left: 3px solid var(--accent);
+}
+
+.recipe-card__head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.recipe-card__head h3 {
+  margin: 4px 0 0;
+  font-size: 1.02rem;
+}
+
+.recipe-card__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.recipe-formula {
+  margin-bottom: 12px;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+.recipe-formula .formula {
+  font-size: 0.73rem;
+}
+
+.recipe-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 16px;
+  margin: 0;
+}
+
+.recipe-facts > div {
+  min-width: 0;
+}
+
+.recipe-facts dt {
+  margin-bottom: 2px;
+  color: var(--muted-2);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.recipe-facts dd {
+  color: var(--muted);
+  font-size: 0.73rem;
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+.recipe-facts dd a {
+  color: var(--ink);
+}
+
+.recipe-facts dd a:hover {
+  color: var(--accent);
+}
+
+.source-path {
+  font-size: 0.62rem !important;
+}
+
+.recipe-effects {
+  margin-top: 11px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.recipe-effects strong {
+  color: var(--ink);
+  font-size: 0.7rem;
+}
+
+.recipe-effects ul {
+  margin: 4px 0 0;
+  padding-left: 1.1em;
+}
+
+.more-recipes {
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+}
+
+.more-recipes > summary {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.more-recipes > summary:hover {
+  color: var(--accent);
+}
+
+.more-recipes[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.recipe-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+.recipe-stack .recipe-card {
+  background: var(--panel);
+}
+
+/* ---------- Tokens de origem ---------- */
+
+.source-label {
+  display: inline-flex;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.source-label--dispenser {
+  border-color: color-mix(in srgb, var(--accent-2) 34%, transparent);
+  color: var(--accent-2);
+}
+
+.source-label--raw {
+  border-color: color-mix(in srgb, var(--warning) 34%, transparent);
+  color: var(--warning);
+}
+
+.source-label--cycle {
+  border-color: color-mix(in srgb, var(--danger) 34%, transparent);
+  color: var(--danger);
+}

@@ -1,0 +1,640 @@
+{
+  "meta": {
+    "gerado_em": "2026-10-28T03:22:14.787Z",
+    "repositorio": "https://github.com/Project-Dumont/Dumont-Station",
+    "raiz": "sprites",
+    "observacao": "PNGs e meta.json copiados sem conversão nem recoloração."
+  },
+  "rsis": [
+    {
+      "nome": "pills.rsi",
+      "caminho": "sprites/pills.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "pill",
+        "pill1",
+        "pill2",
+        "pill3",
+        "pill4",
+        "pill5",
+        "pill6",
+        "pill18",
+        "pill19",
+        "pill20",
+        "pill21",
+        "pill7",
+        "pill8",
+        "pill9",
+        "pill10",
+        "pill11",
+        "pill12",
+        "pill13",
+        "pill14",
+        "pill15",
+        "pill16",
+        "pill17",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/blob/2b969adc2dfd3e9621bf3597c5cbffeb3ac8c9f0/icons/obj/chemical.dmi",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/pills.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/blob/2b969adc2dfd3e9621bf3597c5cbffeb3ac8c9f0/icons/obj/chemical.dmi",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "pills_canister.rsi",
+      "caminho": "sprites/pills_canister.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "pill_canister",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/blob/master/icons/obj/chemical.dmi",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/pills_canister.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/blob/master/icons/obj/chemical.dmi",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "bottle.rsi",
+      "caminho": "sprites/bottle.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "bottle",
+        "inhand-left",
+        "inhand-right",
+        "bottle-1",
+        "bottle-2",
+        "bottle-3",
+        "bottle-4",
+        "bottle1",
+        "bottle10",
+        "bottle11",
+        "bottle12",
+        "bottle13",
+        "bottle14",
+        "bottle15",
+        "bottle16",
+        "bottle17",
+        "bottle18",
+        "bottle19",
+        "bottle2",
+        "bottle20",
+        "bottle3",
+        "bottle4",
+        "bottle5",
+        "bottle6",
+        "bottle7",
+        "bottle8",
+        "bottle9",
+        "lid_bottle",
+        "bottle-1-1",
+        "bottle-1-2",
+        "bottle-1-3",
+        "bottle-1-4",
+        "bottle-1-5",
+        "bottle-1-6",
+        "bottle-2-1",
+        "bottle-2-2",
+        "bottle-2-3",
+        "bottle-2-4",
+        "bottle-2-5",
+        "bottle-2-6",
+        "bottle-3-1",
+        "bottle-3-2",
+        "bottle-3-3",
+        "bottle-3-4",
+        "bottle-3-5",
+        "bottle-3-6",
+        "bottle-4-1",
+        "bottle-4-2",
+        "bottle-4-3",
+        "bottle-4-4",
+        "bottle-4-5",
+        "bottle-4-6"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/bottle.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "vial.rsi",
+      "caminho": "sprites/vial.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "vial",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-left-fill-4",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3",
+        "inhand-right-fill-4",
+        "vial-1",
+        "vial-1-1",
+        "vial-1-2",
+        "vial-1-3",
+        "vial-1-4",
+        "vial-1-5",
+        "vial-1-6"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/2d54693913547f740fac9ee3b8400317d034e989",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/vial.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/2d54693913547f740fac9ee3b8400317d034e989",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "beaker.rsi",
+      "caminho": "sprites/beaker.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "beaker",
+        "lid_beaker",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3",
+        "beaker1",
+        "beaker2",
+        "beaker3",
+        "beaker4",
+        "beaker5",
+        "beaker6",
+        "equipped-BELT"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/beaker.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "beaker_large.rsi",
+      "caminho": "sprites/beaker_large.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "beakerlarge",
+        "lid_beakerlarge",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-left-fill-4",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3",
+        "inhand-right-fill-4",
+        "beakerlarge1",
+        "beakerlarge2",
+        "beakerlarge3",
+        "beakerlarge4",
+        "beakerlarge5",
+        "beakerlarge6"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/beaker_large.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "beaker_bluespace.rsi",
+      "caminho": "sprites/beaker_bluespace.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "beakerbluespace",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552, sprites in hands by @mishutka09",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/beaker_bluespace.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/7ae5126783d4365d76fb235340058afdf0af2552, sprites in hands by @mishutka09",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "jug.rsi",
+      "caminho": "sprites/jug.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "jug",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-left-fill-2",
+        "inhand-left-fill-3",
+        "inhand-left-fill-4",
+        "inhand-left-fill-5",
+        "inhand-right",
+        "inhand-right-fill-1",
+        "inhand-right-fill-2",
+        "inhand-right-fill-3",
+        "inhand-right-fill-4",
+        "inhand-right-fill-5",
+        "jug1",
+        "jug2",
+        "jug3",
+        "jug4",
+        "jug5",
+        "jug6",
+        "jug7",
+        "jug8"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Inhand and inhand reagent sprites Created by HoofedEar (Github). Taken from deltaV at https://github.com/DeltaV-Station/Delta-v/pull/3420.",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/jug.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Inhand and inhand reagent sprites Created by HoofedEar (Github). Taken from deltaV at https://github.com/DeltaV-Station/Delta-v/pull/3420.",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "syringe.rsi",
+      "caminho": "sprites/syringe.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "bluespace_base0",
+        "cryo_base0",
+        "syringe_base0",
+        "syringe_base1",
+        "syringe_base2",
+        "syringe_base3",
+        "syringe_base4",
+        "broken",
+        "syringeproj",
+        "syringe1",
+        "syringe2",
+        "minisyringe1",
+        "minisyringe2",
+        "minisyringe3",
+        "inhand-left",
+        "inhand-right",
+        "inhand-left-fill-1",
+        "inhand-right-fill-1",
+        "inhand-left-fill-2",
+        "inhand-right-fill-2",
+        "inhand-left-fill-3",
+        "inhand-right-fill-3"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from cev-eris https://github.com/discordia-space/CEV-Eris/commit/989b7b343045f30120c198ee100c9fee7ff8a989, bluespace syringe sprites modified by EmoGarbage404 (github), cryo syringe sprites by Ubaser",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/syringe.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from cev-eris https://github.com/discordia-space/CEV-Eris/commit/989b7b343045f30120c198ee100c9fee7ff8a989, bluespace syringe sprites modified by EmoGarbage404 (github), cryo syringe sprites by Ubaser",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "dropper.rsi",
+      "caminho": "sprites/dropper.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "dropper",
+        "borgdropper",
+        "dropper1",
+        "inhand-left",
+        "inhand-left-fill-1",
+        "inhand-right",
+        "inhand-right-fill-1"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/commit/740ff31a81313086cf16761f3677cf1e2ab46c93",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/dropper.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/commit/740ff31a81313086cf16761f3677cf1e2ab46c93",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "chem_bag.rsi",
+      "caminho": "sprites/chem_bag.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "icon",
+        "equipped-BELT",
+        "inhand-left",
+        "inhand-right"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/dfb828ad7e941e0098ea56651349694e0da19e57, inhand sprites by lzk228(discord 455630609641897984)",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/chem_bag.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/dfb828ad7e941e0098ea56651349694e0da19e57, inhand sprites by lzk228(discord 455630609641897984)",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "chemg.rsi",
+      "caminho": "sprites/chemg.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "chemg",
+        "chemg_armed",
+        "chemg_ass",
+        "chemg_locked"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/e1142f20f5e4661cb6845cfcf2dd69f864d67432",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/chemg.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/e1142f20f5e4661cb6845cfcf2dd69f864d67432",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "fillings.rsi",
+      "caminho": "sprites/fillings.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "backpack1",
+        "backpack2",
+        "backpackmob1",
+        "backpackmob2",
+        "glass1",
+        "glass2",
+        "glass3",
+        "glass4",
+        "glass5",
+        "glass6",
+        "largebottle1",
+        "largebottle2",
+        "largebottle3",
+        "largebottle4",
+        "largebottle5",
+        "largebottle6",
+        "smallbottle1",
+        "smallbottle2",
+        "smallbottle3",
+        "smallbottle4",
+        "smallbottle5",
+        "smallbottle6",
+        "vial1",
+        "vial2",
+        "vial3",
+        "vial4",
+        "vial5",
+        "vial6"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/commit/740ff31a81313086cf16761f3677cf1e2ab46c93",
+      "origem": "Resources/Textures/Objects/Specific/Chemistry/fillings.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from cev-eris at https://github.com/discordia-space/CEV-Eris/commit/740ff31a81313086cf16761f3677cf1e2ab46c93",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    },
+    {
+      "nome": "reagent_fillings.rsi",
+      "caminho": "sprites/reagent_fillings.rsi",
+      "tamanho": {
+        "x": 32,
+        "y": 32
+      },
+      "estados": [
+        "backpack0",
+        "backpack15",
+        "backpack60",
+        "backpackmob-10",
+        "backpackmob100",
+        "backpackmob50",
+        "beaker0",
+        "beaker10",
+        "beaker25",
+        "beaker50",
+        "beaker75",
+        "beaker80",
+        "beaker90",
+        "beakergold0",
+        "beakergold10",
+        "beakergold25",
+        "beakergold50",
+        "beakergold75",
+        "beakergold80",
+        "beakergold90",
+        "beakerlarge0",
+        "beakerlarge10",
+        "beakerlarge25",
+        "beakerlarge50",
+        "beakerlarge75",
+        "beakerlarge80",
+        "beakerlarge90",
+        "bloodpack10",
+        "bloodpack100",
+        "bloodpack20",
+        "bloodpack30",
+        "bloodpack40",
+        "bloodpack50",
+        "bloodpack60",
+        "bloodpack70",
+        "bloodpack80",
+        "bloodpack90",
+        "bottle0",
+        "bottle10",
+        "bottle30",
+        "bottle50",
+        "bottle70",
+        "chempack10",
+        "chempack100",
+        "chempack20",
+        "chempack30",
+        "chempack40",
+        "chempack50",
+        "chempack60",
+        "chempack70",
+        "chempack80",
+        "chempack90",
+        "dropper",
+        "emptycondiment0",
+        "emptycondiment10",
+        "emptycondiment100",
+        "emptycondiment25",
+        "emptycondiment50",
+        "emptycondiment75",
+        "glassbottle0",
+        "glassbottle10",
+        "glassbottle20",
+        "glassbottle30",
+        "glassbottle40",
+        "glassbottle50",
+        "glassbottle60",
+        "glassbottle70",
+        "glassbottle80",
+        "glassbottle90",
+        "glassbottlesmall0",
+        "glassbottlesmall10",
+        "glassbottlesmall20",
+        "glassbottlesmall30",
+        "glassbottlesmall40",
+        "glassbottlesmall50",
+        "glassbottlesmall60",
+        "glassbottlesmall70",
+        "glassbottlesmall80",
+        "glassbottlesmall90",
+        "largebottle0",
+        "largebottle10",
+        "largebottle25",
+        "largebottle50",
+        "largebottle75",
+        "largebottle80",
+        "largebottle90",
+        "maunafilling25",
+        "pill",
+        "powderpile",
+        "smallbottle-10",
+        "smallbottle10",
+        "smallbottle25",
+        "smallbottle50",
+        "smallbottle75",
+        "smallbottle80",
+        "smallbottle90",
+        "splashed",
+        "syringe1",
+        "syringe10",
+        "syringe15",
+        "syringe5"
+      ],
+      "licenca": "CC-BY-SA-3.0",
+      "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/a7215663648f4289d2446a1c82aec1c9a406310c",
+      "origem": "Resources/Textures/Objects/Misc/reagent_fillings.rsi",
+      "meta": {
+        "version": 1,
+        "license": "CC-BY-SA-3.0",
+        "copyright": "Taken from tgstation at commit https://github.com/tgstation/tgstation/commit/a7215663648f4289d2446a1c82aec1c9a406310c",
+        "size": {
+          "x": 32,
+          "y": 32
+        }
+      }
+    }
+  ]
+}

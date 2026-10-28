@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Guia de Chem">
+  <rect width="64" height="64" rx="15" fill="#0c1210"/>
+  <path d="M25 11h14M28 11v13L16 47a6 6 0 0 0 5.2 8.8h21.6A6 6 0 0 0 48 47L36 24V11" fill="none" stroke="#7ff0c4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 42c5-4 8 4 13 0s7 3 11-1l5.2 8.8A6 6 0 0 1 46.8 56H17.2A6 6 0 0 1 12 49.2V47z" fill="#2dd4a8" opacity=".75"/>
+  <circle cx="28" cy="37" r="2" fill="#f6f1df"/>
+  <circle cx="38" cy="32" r="1.5" fill="#f6f1df"/>
+</svg>

@@ -1,0 +1,505 @@
+/* ============================================================
+   Impressão — guia de grupo, lista de favoritos e fichas
+   ============================================================ */
+
+@media print {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --bg: #fff;
+    --bg-soft: #fff;
+    --panel: #fff;
+    --panel-2: #fff;
+    --panel-3: #f6f6f3;
+    --ink: #161616;
+    --ink-strong: #000;
+    --muted: #333;
+    --muted-2: #555;
+    --line: #c9c9c4;
+    --line-strong: #8b8b85;
+    --accent: #111;
+    --accent-ink: #fff;
+    --accent-2: #222;
+    --danger: #111;
+    --warning: #111;
+    --focus: #000;
+    --color-unknown: #999;
+    --shadow: none;
+    --shadow-soft: none;
+    --header-bg: #fff;
+    --glow: transparent;
+  }
+
+  @page {
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #111 !important;
+    font-size: 9.6pt;
+    line-height: 1.4;
+  }
+
+  body::before,
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .toast,
+  .boot,
+  .theme-toggle,
+  .nav-toggle,
+  .search-box,
+  .search-panel,
+  .breadcrumb,
+  .filter-panel,
+  .list-toolbar,
+  .section-nav,
+  .group-switcher,
+  .favorites-toolbar,
+  .favorites-help,
+  .button,
+  .button-row,
+  .favorite-button,
+  .screen-only,
+  .calc-side,
+  .planner-form,
+  .more-recipes > summary,
+  .reagent-hero__aside .fine-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .page,
+  .page--detail,
+  .page--group {
+    padding: 0;
+  }
+
+  a {
+    color: #111 !important;
+    text-decoration: none !important;
+  }
+
+  code,
+  kbd,
+  pre {
+    border-color: #ccc !important;
+    background: #f4f4f2 !important;
+    color: #111 !important;
+  }
+
+  .muted,
+  .fine-print,
+  .small {
+    color: #444 !important;
+  }
+
+  .page-heading {
+    margin-bottom: 10pt;
+  }
+
+  .page-heading h1 {
+    font-size: 22pt;
+  }
+
+  .page-heading__intro {
+    color: #333 !important;
+    font-size: 9pt;
+  }
+
+  /* ---------- Ficha de reagente ---------- */
+
+  .reagent-hero {
+    grid-template-columns: 90px 1fr;
+    padding: 0 0 10pt;
+    border: 0;
+    border-top: 2pt solid #111;
+    border-radius: 0;
+    background: none;
+  }
+
+  .reagent-hero::after,
+  .reagent-hero__visual::before {
+    display: none;
+  }
+
+  .reagent-hero__title-row h1 {
+    font-size: 26pt;
+  }
+
+  .reagent-hero__aside {
+    display: none;
+  }
+
+  .reagent-hero__facts {
+    grid-template-columns: repeat(4, 1fr);
+    border-color: #ccc;
+  }
+
+  .content-section,
+  .plan-panel,
+  .recipe-card,
+  .effect-group,
+  .threshold-card,
+  .usedin-card {
+    border-color: #ccc !important;
+    background: #fff !important;
+    break-inside: avoid;
+  }
+
+  .content-section {
+    padding: 0;
+    border: 0;
+    margin-top: 12pt;
+  }
+
+  .detail-layout,
+  .detail-side {
+    display: block;
+  }
+
+  .detail-main,
+  .detail-side {
+    display: block;
+  }
+
+  .detail-side .content-section {
+    margin-top: 12pt;
+  }
+
+  .planner,
+  .calc-output .planner {
+    display: none !important;
+  }
+
+  .recipe-card,
+  .effect-group,
+  .threshold-card {
+    break-inside: avoid;
+  }
+
+  .effect-list,
+  .threshold-grid {
+    display: block;
+  }
+
+  .effect-item,
+  .threshold-card {
+    border-color: #ddd !important;
+  }
+
+  .card-grid {
+    display: block;
+  }
+
+  .reagent-card {
+    margin-bottom: 6pt;
+    padding: 7pt;
+    border: 1px solid #ccc;
+    background: #fff;
+    break-inside: avoid;
+  }
+
+  .reagent-card__desc {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+
+  /* ---------- Guia de grupo ---------- */
+
+  .page--group .group-hero {
+    grid-template-columns: 1fr;
+    margin: 0 0 8pt;
+    padding: 0 0 7pt;
+    border: 0;
+    border-top: 2pt solid #111;
+    border-radius: 0;
+    background: none;
+  }
+
+  .page--group .group-hero h1 {
+    margin: 0 0 3pt;
+    font-size: 25pt;
+  }
+
+  .page--group .group-hero__desc {
+    margin: 0 0 5pt;
+    color: #222 !important;
+    font-size: 9pt;
+  }
+
+  .page--group .group-hero__stats {
+    margin: 0;
+    color: #222 !important;
+    font-size: 8pt;
+  }
+
+  .page--group .group-hero__stats strong {
+    color: #000 !important;
+  }
+
+  .page--group .group-hero__aside,
+  .page--group .group-index,
+  .page--group .card-grid,
+  .page--group .notice {
+    display: none !important;
+  }
+
+  .page--group .print-guide {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #fff;
+  }
+
+  .page--group .print-guide__head {
+    margin-bottom: 7pt;
+    padding: 0;
+  }
+
+  .page--group .print-guide__head h2 {
+    margin: 0 0 2pt;
+    font-size: 15pt;
+  }
+
+  .page--group .print-guide__head p {
+    display: none;
+  }
+
+  .print-guide__print-head {
+    display: flex !important;
+    justify-content: space-between;
+    gap: 12pt;
+    margin-bottom: 6pt;
+    padding-bottom: 4pt;
+    border-bottom: 1pt solid #111;
+    color: #222;
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+  }
+
+  .guide-table {
+    min-width: 0 !important;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7.6pt;
+    line-height: 1.35;
+  }
+
+  .guide-table thead {
+    display: table-header-group;
+  }
+
+  .guide-table tr {
+    break-inside: avoid;
+  }
+
+  .guide-table th,
+  .guide-table td {
+    padding: 3pt 4pt;
+    border: 0.5pt solid #bbb;
+    color: #111;
+  }
+
+  .guide-table th {
+    border-color: #777;
+    background: #eee !important;
+    color: #111;
+    font-size: 6.6pt;
+  }
+
+  .guide-table__name {
+    color: #000;
+    font-size: 8pt;
+  }
+
+  .guide-table__id {
+    color: #444;
+  }
+
+  .guide-table .pill {
+    display: none;
+  }
+
+  .guide-table .color-token {
+    color: #222;
+    font-size: 6.6pt;
+  }
+
+  .guide-table .color-token__swatch {
+    width: 8pt;
+    height: 8pt;
+    border-color: #777;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-guide__foot {
+    margin-top: 6pt;
+    color: #444;
+    font-size: 7pt;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+    background: #fff;
+  }
+
+  /* ---------- Calculadora / planejador ---------- */
+
+  .calc-layout {
+    display: block;
+  }
+
+  .calc-output {
+    padding: 0;
+    border: 0;
+    background: #fff;
+  }
+
+  .calc-target {
+    border-bottom-color: #ccc;
+  }
+
+  .calc-conditions {
+    border-color: #ccc;
+    background: #ccc;
+  }
+
+  .calc-conditions > div {
+    background: #fff;
+  }
+
+  .plan__stats {
+    grid-template-columns: repeat(4, 1fr);
+    border-color: #ccc;
+    background: #ccc;
+  }
+
+  .stat-mini {
+    background: #fff;
+  }
+
+  .plan__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tree-list .tree-list {
+    border-left-color: #bbb;
+  }
+
+  .tree-branch > summary::before {
+    border-color: #bbb;
+    color: #333;
+  }
+
+  /* ---------- Créditos ---------- */
+
+  .about-lead,
+  .about-panel,
+  .about-stats,
+  .about-footnote {
+    border-color: #ccc !important;
+    background: #fff !important;
+  }
+
+  .about-lead {
+    display: block;
+    padding: 0 0 8pt;
+    border: 0;
+    border-top: 2pt solid #111;
+  }
+
+  .about-lead__mark {
+    display: none;
+  }
+
+  .about-stats {
+    display: block;
+    border: 0;
+    margin-bottom: 10pt;
+  }
+
+  .about-stats > div {
+    display: inline-block;
+    width: 16%;
+    padding: 4pt;
+    background: #fff;
+    border: 0;
+    vertical-align: top;
+  }
+
+  .about-stats span {
+    font-size: 12pt;
+  }
+
+  .about-stats small {
+    font-size: 6pt;
+  }
+
+  .about-grid {
+    display: block;
+  }
+
+  .about-panel {
+    padding: 0;
+    margin-top: 10pt;
+    border: 0;
+  }
+
+  .about-panel--accent {
+    border-top: 1pt solid #111;
+    padding-top: 5pt;
+  }
+
+  .decision-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4pt;
+  }
+
+  .decision {
+    padding: 5pt;
+    border-color: #ccc;
+  }
+
+  .limit-list li {
+    break-inside: avoid;
+  }
+
+  .license-table {
+    min-width: 0;
+    font-size: 6.8pt;
+  }
+
+  .license-table td,
+  .license-table th {
+    padding: 3pt;
+  }
+
+  .about-panel a::after {
+    content: '';
+  }
+
+  /* ---------- Página 404 ---------- */
+
+  .page--notfound .empty-state {
+    border: 0;
+    min-height: 0;
+    padding: 0;
+  }
+}
