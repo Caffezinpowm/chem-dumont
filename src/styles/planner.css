@@ -496,13 +496,20 @@
 }
 
 .calc-target__visual {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 108px;
   height: 108px;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: radial-gradient(circle, var(--panel-3), var(--bg-soft));
+}
+
+/* O béquer ocupa 13x16 px de um canvas 32x32, com o desenho 2,3 px à esquerda
+   e 4,7 px abaixo do centro da caixa em tamanho grande. Compensa só a arte. */
+.calc-target__visual .reagent-sprite {
+  transform: translate(1.5625%, -3.125%);
 }
 
 .calc-target__copy {
