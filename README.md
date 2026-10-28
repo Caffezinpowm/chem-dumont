@@ -101,7 +101,8 @@ Parâmetros de consulta usados pela interface:
 ## Fabricação guiada
 
 Na página de um reagente com receita, o botão **Fabricar** abre um modal para escolher a
-quantidade final e a rota. O roteiro é montado com os mesmos dados da árvore de produção:
+quantidade final e a rota. O modal abre com **100u** por padrão; o parâmetro `?qtd=` na URL redefine
+a quantidade inicial. O roteiro é montado com os mesmos dados da árvore de produção:
 
 1. uma etapa de preparação agrupa os materiais-base e os catalisadores;
 2. cada reação aparece em ordem topológica, com os intermediários primeiro e o lote final por

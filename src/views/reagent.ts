@@ -28,7 +28,7 @@ import {
 import { favoriteButton } from '../lib/state';
 import { groupBadge } from '../lib/components';
 import { recipeYield } from '../lib/production';
-import { fabricationModalHtml, setupFabrication } from '../lib/fabrication';
+import { DEFAULT_CRAFT_AMOUNT, fabricationModalHtml, setupFabrication } from '../lib/fabrication';
 import type { ViewResult } from './types';
 
 function translationNote(reagent: Reagent): string {
@@ -113,6 +113,8 @@ export function reagentView(data: ChemData, slug: string | undefined, query: URL
       : selectedRecipe
         ? Math.max(selectedRecipe.rendimento || 0, 30)
         : 30;
+  const craftQty =
+    requestedQty > 0 && Number.isFinite(requestedQty) ? requestedQty : DEFAULT_CRAFT_AMOUNT;
   const color = reagent.cor_hex ?? null;
   const style = `--reagent-accent:${colorCss(color)};--reagent-soft:${hexAlpha(color, 0.14)};--reagent-soft-2:${hexAlpha(color, 0.05)}`;
   const translator = reagent.traducao_campos;
@@ -274,7 +276,7 @@ export function reagentView(data: ChemData, slug: string | undefined, query: URL
           </aside>
         </div>
       </div>
-      ${fabricationModalHtml(reagent, recipes, selectedRecipe?.id, defaultQty)}
+      ${fabricationModalHtml(reagent, recipes, selectedRecipe?.id, craftQty)}
     </div>`,
     mount(main) {
       if (selectedRecipe) {
@@ -285,7 +287,7 @@ export function reagentView(data: ChemData, slug: string | undefined, query: URL
         });
         setupFabrication(main, data, reagent, recipes, {
           initialRecipeId: selectedRecipe.id,
-          initialAmount: defaultQty,
+          initialAmount: craftQty,
         });
       }
     },

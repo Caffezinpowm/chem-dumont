@@ -47,6 +47,9 @@ interface FabricationOptions {
   initialAmount?: number;
 }
 
+/** Quantidade inicial do roteiro de fabricação quando não há quantidade no link. */
+export const DEFAULT_CRAFT_AMOUNT = 100;
+
 let activeSession: CraftSession | null = null;
 let requestToken = 0;
 
@@ -509,11 +512,11 @@ export function fabricationModalHtml(
   target: Reagent,
   recipes: Recipe[],
   initialRecipeId?: string,
-  initialAmount = 30,
+  initialAmount = DEFAULT_CRAFT_AMOUNT,
 ): string {
   if (!recipes.length) return '';
   const selected = recipes.find((recipe) => recipe.id === initialRecipeId) ?? recipes.find((recipe) => recipe.principal) ?? recipes[0];
-  const amount = initialAmount > 0 && Number.isFinite(initialAmount) ? cleanAmount(initialAmount) : 30;
+  const amount = initialAmount > 0 && Number.isFinite(initialAmount) ? cleanAmount(initialAmount) : DEFAULT_CRAFT_AMOUNT;
   const supports = supportsDocumentPip();
   return `<dialog class="craft-modal" data-craft-modal aria-labelledby="craft-modal-title">
     <div class="craft-modal__sheet">
