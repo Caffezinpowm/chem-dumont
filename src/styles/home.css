@@ -4,7 +4,6 @@
 
 .hero {
   position: relative;
-  overflow: hidden;
   padding-block: clamp(46px, 7vw, 92px) clamp(54px, 8vw, 96px);
   border-bottom: 1px solid var(--line);
 }
@@ -13,6 +12,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
   background:
     radial-gradient(ellipse 58% 55% at 18% 38%, var(--glow), transparent 66%),
